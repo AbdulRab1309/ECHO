@@ -1,21 +1,39 @@
-# Product Requirements Document (PRD)
+# Product Requirements and Current Status
 
-## Overview
-[cite_start]Design and develop an e-commerce website that allows users to buy and sell tangible goods, digital products, or services online[cite: 3]. [cite_start]The platform must include basic features necessary for standard e-commerce operations[cite: 4, 5].
+## Product
 
-## Core Pages & Scope
-[cite_start]The application will consist of 10 distinct pages[cite: 16]:
+ECHO is a responsive storefront prototype focused on embedded electronics and maker hardware. The current implementation demonstrates catalog browsing and a frontend shopping flow; it is not a live transaction service.
 
-1. [cite_start]**Home Page**: Must include a Navbar, Sliders, Shop by Category section, Latest Products, Features, Footer, and a Scroll to Top Button [cite: 18-26].
-2. [cite_start]**Products Page**: Must display a Products List, Category Filter, and Price Range Filter [cite: 28-32].
-3. [cite_start]**Product View Page**: Must display the Product Title, Images, Description, Price, Ratings, Related Products, and an Add to cart button [cite: 34-42].
-4. [cite_start]**Category Page**: Must include a Category List, Title, Images, and a Short Description [cite: 43-49].
-5. [cite_start]**Cart Page**: Must display the Cart Products List with Title, Images, Quantity, Price, and Total Amount [cite: 51-58].
-6. [cite_start]**Check Out Page**: Must include an Order Summary and a Shipping Information Form [cite: 59-63].
-7. [cite_start]**Order Confirmation Page**: Must show an Order Confirmation Message, Order No, and Status [cite: 64-70].
-8. [cite_start]**About Us Page**: Must contain Images & Text, Features, and Testimonials [cite: 71-75].
-9. [cite_start]**Contact Us Page**: Must display Contact Info and a Contact Form with submission validation [cite: 76-81].
-10. [cite_start]**Search Page**: Must display Search Products Listing based on user queries [cite: 82-84].
+## Implemented
 
-## Global Elements
-* [cite_start]The Navbar, Footer, and "Scroll to Top Button" will be common components across all pages[cite: 27].
+- Home page with brand feature, product feature, category links, product listings, and store highlights.
+- Shop page with category checkboxes, a maximum-price slider, and sorting by featured order, price, or rating.
+- Category pages with category imagery and descriptions.
+- Product detail pages with local images, specifications, ratings, related products, and optional video/model presentation.
+- Search page with instant matching against the local catalog.
+- Cart page with quantity updates, removal, clear-cart, and subtotal calculation.
+- Checkout form with client-side validation and a demo order confirmation flow.
+- About and contact pages; the contact form currently shows a client-side success state only.
+- Red, white, and black themes.
+- Read-only REST API routes for product listing, product lookup by slug, and search.
+
+## Data and transaction boundaries
+
+The four sample products and three category definitions are maintained in `lib/products.ts`. The API reads that same in-process catalog. The catalog is not loaded from a remote provider or database. The cart is persisted in the browser; demo order details are written to `sessionStorage`. No payment is collected and no order, contact message, or inventory change is stored on a server.
+
+## Not implemented
+
+- Database-backed catalog, inventory, cart, or order persistence.
+- User accounts, authentication, or authorization.
+- Payment processing, shipping calculation, or real order fulfillment.
+- Server-side contact form delivery.
+- Product administration or inventory management.
+
+## Acceptance criteria for a production commerce service
+
+- Persist product, inventory, customer, order, and contact data in a secured database.
+- Validate prices, stock, and order totals on the server; never trust client-submitted totals.
+- Integrate a payment provider using server-side credentials and verified payment webhooks.
+- Add authentication and authorization for customer and administrative operations.
+- Deliver contact messages through a server-side email or support integration.
+- Add automated API, checkout, and accessibility tests before production use.

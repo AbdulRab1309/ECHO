@@ -1,26 +1,30 @@
 # Development Roadmap
 
-- [ ] **Phase 1: Setup & Global UI**
-  - [ ] Initialize Next.js project with Tailwind CSS.
-  - [ ] [cite_start]Build global Navbar, Footer, and Scroll to Top Button[cite: 27].
-  - [ ] Set up MongoDB connection and basic Mongoose schemas.
+This roadmap distinguishes the current frontend prototype from work required for a production commerce service.
 
-- [ ] **Phase 2: Core Browsing (Steps 1, 2, 4)**
-  - [ ] [cite_start]Build Home Page (Sliders, Categories, Latest Products, Features) [cite: 18-24].
-  - [ ] [cite_start]Build Category Page (Category List with title/images) [cite: 44-49].
-  - [ ] [cite_start]Build Products Page (List, Category Filter, Price Filter) [cite: 28-32].
-  - [ ] [cite_start]Build Search Page functionality [cite: 82-84].
+## Completed: storefront prototype
 
-- [ ] **Phase 3: Product & Cart (Steps 3, 5)**
-  - [ ] [cite_start]Build Product View Page (Details, Ratings, Related, Add to Cart) [cite: 34-42].
-  - [ ] Implement global Cart state (add, remove, adjust quantity).
-  - [ ] [cite_start]Build Cart Page (List view with total amount calculation) [cite: 52-58].
+- [x] Next.js App Router, TypeScript, and Tailwind project structure.
+- [x] Shared navigation, footer, theme toggle, and scroll-to-top behavior.
+- [x] Home, shop, category, product detail, search, cart, checkout, order confirmation, about, and contact pages.
+- [x] Curated local product and category data, including specifications and related products.
+- [x] Shop filters and sorting, product search, and product detail routes.
+- [x] Zustand cart persisted in browser `localStorage`.
+- [x] Client-side checkout validation and session-only demo order confirmation.
+- [x] Read-only `GET /api/products`, `GET /api/products/:slug`, and `GET /api/search` route handlers.
 
-- [ ] **Phase 4: Checkout Flow (Steps 6, 7)**
-  - [ ] [cite_start]Build Checkout Page (Order Summary, Shipping Form) [cite: 60-63].
-  - [ ] Implement order submission API route.
-  - [ ] [cite_start]Build Order Confirmation Page (Message, Order No, Status) [cite: 65-70].
+## Next: persistence and transactions
 
-- [ ] **Phase 5: Informational Pages (Steps 8, 9)**
-  - [ ] [cite_start]Build About Us Page (Images, Text, Features, Testimonials) [cite: 72-75].
-  - [ ] [cite_start]Build Contact Us Page (Info, Form with validation) [cite: 77-81].
+- [ ] Choose and configure a database; replace the in-memory catalog with repository-backed product and inventory access.
+- [ ] Add server-side cart and order endpoints with input validation and stock checks.
+- [ ] Persist orders so confirmation links remain available across browser sessions and devices.
+- [ ] Add payment-provider integration, webhook verification, and transaction status handling.
+- [ ] Add shipping-rate calculation and fulfillment status updates.
+
+## Next: operations and customer features
+
+- [ ] Add authentication and role-based access for customer and admin workflows.
+- [ ] Build catalog and inventory administration.
+- [ ] Deliver contact-form submissions to a support inbox or service.
+- [ ] Add automated unit, API, and end-to-end tests, plus accessibility checks.
+- [ ] Add observability, deployment configuration, and production security review.
