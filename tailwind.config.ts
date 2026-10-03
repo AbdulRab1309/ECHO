@@ -1,4 +1,10 @@
-import type { Config } from "tailwindcss";
+type Config = {
+  content?: string[];
+  theme?: {
+    extend?: Record<string, any>;
+  };
+  plugins?: any[];
+};
 
 const config: Config = {
   content: [

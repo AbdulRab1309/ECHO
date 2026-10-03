@@ -1,7 +1,13 @@
 node_modules
 .next
 out
-.env*.local
+# Environment variables and secrets (all directories)
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.template
+!.env.*.template
 .DS_Store
 *.log
 .vercel

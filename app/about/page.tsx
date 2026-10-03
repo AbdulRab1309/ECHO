@@ -4,18 +4,18 @@ import Image from "next/image";
 const TESTIMONIALS = [
   {
     quote: "Bought a Pi 5 on a Tuesday, building a home server by Wednesday. The packaging was so clean I almost didn't want to open it.",
-    name: "Aarav M.",
+    name: "Abdul Rab",
     role: "Robotics, Bengaluru",
   },
   {
     quote: "I've ordered from three other suppliers this month. ECHO. is the only one that ships anti-static bags inside the box.",
-    name: "Lina K.",
-    role: "IoT Consultant, Berlin",
+    name: "Ayesha Tabassum J",
+    role: "IoT Consultant, Bengaluru",
   },
   {
     quote: "Their 3D model on the UNO Q page saved me a return. Could see the header orientation before I bought.",
-    name: "Tomás R.",
-    role: "Hardware Engineer, Montevideo",
+    name: "Arvind Bhati",
+    role: "Hardware Engineer, Bengaluru",
   },
 ];
 

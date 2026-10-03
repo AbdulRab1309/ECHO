@@ -1,8 +1,12 @@
-# ECHO REST API
+# ECHO REST APIs
 
-The API is implemented with Next.js App Router route handlers and is available at `/api`. It reads the current curated catalog in `lib/products.ts`; it requires no external provider, account, API key, or database.
+This project currently has two read-only JSON APIs. Both use bundled demo data and require no external account or API key. The Express backend is separate from the Next.js frontend and is not yet consumed by the storefront.
 
-## List products
+## Next.js API
+
+The Next.js App Router endpoints run on the frontend origin, normally `http://localhost:3000`, and read product data from `lib/products.ts`.
+
+### List products
 
 `GET /api/products`
 
@@ -14,46 +18,36 @@ Optional query parameters:
 
 Example: `GET /api/products?category=wireless&limit=10&offset=0`
 
-Success response (`200`):
+Returns `{ "data": [...], "pagination": { "limit", "offset", "count", "total" } }`. Invalid categories or pagination values return `400` with an `error` message.
 
-```json
-{
-  "data": [],
-  "pagination": {
-    "limit": 10,
-    "offset": 0,
-    "count": 1,
-    "total": 1
-  }
-}
-```
-
-Invalid categories or pagination values return `400` with an `error` message.
-
-## Get one product
+### Get one product
 
 `GET /api/products/:slug`
 
 Example: `GET /api/products/esp32`
 
-Success response (`200`): `{ "data": { ...product } }`. Unknown slugs return `404` with `{ "error": "Product not found" }`.
+Returns `{ "data": { ...product } }`. Unknown slugs return `404` with `{ "error": "Product not found" }`.
 
-## Search products
+### Search products
 
 `GET /api/search?q=raspberry`
 
-Success response (`200`):
+Returns `{ "data": [...], "query": "raspberry", "count": 1 }`. Missing or blank `q` returns `400`. Search matches product name, tagline, short description, and category, case-insensitively.
 
-```json
-{
-  "data": [],
-  "query": "raspberry",
-  "count": 1
-}
-```
+## Express API
 
-Missing or blank `q` returns `400`. Search matches product name, tagline, short description, and category, case-insensitively.
+The standalone Express server is in `backend/` and defaults to `http://localhost:5000`. Run it with `cd backend`, `npm ci`, then `npm run dev`. Copy `.env.example` to `.env` and configure the allowed frontend origins through `FRONTEND_URL_LOCAL` and `FRONTEND_URL_PROD` when making browser requests. The server allows GET and OPTIONS requests only.
+
+| Method and path | Query parameters | Response |
+| --- | --- | --- |
+| `GET /api/health` | None | Health status object |
+| `GET /api/products` | Optional `category`, `q` | Array of matching products |
+| `GET /api/products/:slug` | Slug path parameter | Product object, or `404` JSON error |
+| `GET /api/products/related` | Optional comma-separated `slugs` | Array of matching products |
+| `GET /api/categories` | None | Array of categories |
+
+The Express product and category records currently live in `backend/src/data/catalog.js`, separate from the Next.js catalog. Keep these datasets aligned until the frontend is switched to the backend or both services use a persistent shared data source.
 
 ## Current limitations
 
-The catalog is bundled demo data, so API changes are not persisted. Cart state is stored in the browser, and checkout does not create a server-side order or process payment. Persistent inventory, carts, and orders require a database and a payment provider; no credentials are needed for the current read-only endpoints.
+Neither API uses a database or persists changes. Cart state is stored in the browser, and checkout does not create a server-side order or process payment. Persistent inventory, carts, and orders require a database and payment integration.

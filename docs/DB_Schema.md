@@ -11,7 +11,7 @@ There is no database connection, Mongoose model, or persistent backend schema in
 | `CartItem` | Zustand cart state, persisted in browser `localStorage` under `echo-cart`. |
 | `Order` | Client-side order shape. Checkout stores instances in browser `sessionStorage` under `order-<orderNumber>`. |
 
-The REST routes return the current in-process product data. They do not read or write a database. Cart, checkout, and contact form submissions are not backed by server endpoints.
+The Next.js API returns the in-process catalog from `lib/products.ts`. The Express API returns a separate in-process catalog from `backend/src/data/catalog.js`. Neither API reads or writes a database. Cart, checkout, and contact form submissions are not backed by server endpoints.
 
 ## Persistence behavior
 

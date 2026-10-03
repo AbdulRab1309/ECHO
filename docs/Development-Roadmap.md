@@ -12,9 +12,11 @@ This roadmap distinguishes the current frontend prototype from work required for
 - [x] Zustand cart persisted in browser `localStorage`.
 - [x] Client-side checkout validation and session-only demo order confirmation.
 - [x] Read-only `GET /api/products`, `GET /api/products/:slug`, and `GET /api/search` route handlers.
+- [x] Standalone Express backend with health, product, related-product, and category GET routes.
 
-## Next: persistence and transactions
+## Next: connect the services and add persistence
 
+- [ ] Connect storefront product browsing and search to the Express API; remove duplicate catalog data.
 - [ ] Choose and configure a database; replace the in-memory catalog with repository-backed product and inventory access.
 - [ ] Add server-side cart and order endpoints with input validation and stock checks.
 - [ ] Persist orders so confirmation links remain available across browser sessions and devices.

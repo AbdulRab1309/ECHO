@@ -4,7 +4,7 @@
 
 - **Next.js 14.2.5 App Router** provides file-based pages, shared layouts, static product pages, and REST route handlers.
 - **React 18** and **TypeScript** power the UI and domain types.
-- **Node.js** runs the Next.js development and production servers.
+- **Node.js** runs the Next.js app and the separate Express backend in `backend/`.
 
 ## UI and interaction
 
@@ -19,6 +19,8 @@
 - `lib/products.ts` is the current source of product and category data and provides lookup, category-filter, related-product, and search helpers.
 - `lib/types.ts` defines the `Product`, `Category`, `CartItem`, and `Order` TypeScript interfaces.
 - `app/api/products/route.ts`, `app/api/products/[slug]/route.ts`, and `app/api/search/route.ts` expose read-only JSON endpoints over the in-process catalog.
+- `backend/src/server.js` starts a standalone Express API with CORS configuration from environment variables; routes are defined in `backend/src/routes/api.js`.
+- The Express backend currently uses its own static catalog at `backend/src/data/catalog.js` and is not yet connected to the storefront UI.
 - There is currently **no database, ORM, external product API, authentication service, or payment provider** configured.
 - Checkout creates a demo order in browser `sessionStorage`; the contact form does not deliver its submission to a server.
 
@@ -28,7 +30,8 @@
 - `npm run build`: production build and type validation
 - `npm run start`: serve a production build
 - `npm run lint`: invokes the Next.js lint command; ESLint is not currently listed as a project dependency.
+- In `backend/`, `npm run dev` starts the API with nodemon and `npm start` starts it with Node.js.
 
 ## Architecture direction
 
-Keep product-domain types and catalog access separate from route handlers. When a database is selected, replace the static data source behind those helpers and API routes; do not treat client-supplied price or inventory as authoritative.
+The frontend and Express service currently expose separate read-only APIs over separate copies of the catalog. The next integration step is to make the frontend consume the Express API and establish one authoritative catalog source. When a database is selected, replace the static data source behind the API; do not treat client-supplied price or inventory as authoritative.

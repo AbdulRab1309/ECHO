@@ -19,7 +19,7 @@ ECHO is a responsive storefront prototype focused on embedded electronics and ma
 
 ## Data and transaction boundaries
 
-The four sample products and three category definitions are maintained in `lib/products.ts`. The API reads that same in-process catalog. The catalog is not loaded from a remote provider or database. The cart is persisted in the browser; demo order details are written to `sessionStorage`. No payment is collected and no order, contact message, or inventory change is stored on a server.
+The frontend sample products and categories are maintained in `lib/products.ts`; the Next.js API reads that catalog. The standalone Express backend currently has a separate copy in `backend/src/data/catalog.js` and is not connected to the storefront UI. Neither catalog is loaded from a database. The cart is persisted in the browser; demo order details are written to `sessionStorage`. No payment is collected and no order, contact message, or inventory change is stored on a server.
 
 ## Not implemented
 
