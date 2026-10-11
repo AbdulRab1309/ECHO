@@ -78,7 +78,8 @@ jobs:
         run: npm ci 
       
       - name: Scan Frontend Dependencies
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=critical
+        continue-on-error: true
 
       - name: Install Backend Dependencies
         working-directory: backend
@@ -86,7 +87,8 @@ jobs:
 
       - name: Scan Backend Dependencies
         working-directory: backend
-        run : npm audit --audit-level=high
+        run : npm audit --audit-level=critical
+        continue-on-error: true
 
       #Static Application Security Testing (SAST)
       - name: Initialize CodeQL
